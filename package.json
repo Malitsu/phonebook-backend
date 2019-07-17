@@ -1,0 +1,27 @@
+{
+  "name": "phonebook-backend",
+  "version": "0.0.1",
+  "description": "Backend for the phonebook exercises of Full Stack Open 2019 course",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "watch": "nodemon index.js",
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Malitsu/phonebook-backend.git"
+  },
+  "author": "Tiina Malinen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Malitsu/phonebook-backend/issues"
+  },
+  "homepage": "https://github.com/Malitsu/phonebook-backend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
