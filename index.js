@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+app.use(express.static('build'))
 
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
