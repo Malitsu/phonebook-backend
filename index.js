@@ -10,43 +10,6 @@ const morgan = require('morgan')
 const cors = require('cors')
 app.use(cors())
 
-/*
-let persons = [
-    {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": 1
-    },
-    {
-      "name": "Ada Lovelace",
-      "number": "39-44-5323523",
-      "id": 2
-    },
-    {
-      "name": "Dan Abramov",
-      "number": "12-43-234345",
-      "id": 3
-    },
-    {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
-      "id": 4
-    },
-    {
-      "name": "Alli Kuikamoinen",
-      "number": "123 123",
-      "date": "2019-07-13T13:57:26.799Z",
-      "id": 5
-    },
-    {
-      "name": "Timo Hokkanen",
-      "number": "000 0000",
-      "date": "2019-07-14T15:42:29.547Z",
-      "id": 6
-    }
-  ]
-*/
-
 morgan.token('data', function getBody(req) {
   return JSON.stringify(req.body)
 })
@@ -87,7 +50,7 @@ app.delete('/api/persons/:id', (request, response) => {
 
   response.status(204).end()
 })
-
+8
 const generateId = () => {
   const id = Math.floor(Math.random() * 1000)
   console.log(id)
@@ -96,7 +59,6 @@ const generateId = () => {
 
 app.post('/api/persons', (request, response) => {
   const body = request.body
-  console.log(body)
 
   if (!body.name || !body.number) {
     return response.status(400).json({ 
@@ -104,23 +66,26 @@ app.post('/api/persons', (request, response) => {
     })
   }
 
-  const samePersons = persons.filter(person => person.name.includes(body.name))
+  /* const samePersons = persons.filter(person => person.name.includes(body.name))
 
   if (samePersons.length > 0) {
     return response.status(400).json({ 
       error: 'name must be unique' 
     })
-  }
+  } */
 
-  const person = {
+  const person = new Person({
     name: body.name,
     number: body.number,
-    id: generateId()
-  }
+    date: new Date()
+  }) 
 
-  persons = persons.concat(person)
+  person
+  .save()
+  .then(savedPerson => {
+    response.json(savedPerson.toJSON())
+  })
 
-  response.json(person)
 })
 
 const PORT = process.env.PORT
