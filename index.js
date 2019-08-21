@@ -25,7 +25,6 @@ app.get('/api/persons', (req, res) => {
   Person
   .find({})
   .then(persons => {
-    //res.json(persons)
     res.json(persons.map(person => person.toJSON()))
   })
 })
@@ -44,13 +43,18 @@ app.get('/api/persons/:id', (request, response) => {
   }
 })
 
-app.delete('/api/persons/:id', (request, response) => {
-  const id = Number(request.params.id)
+app.delete('/api/persons/:id', (request, response, next) => {
+  Person.findByIdAndRemove(request.params.id)
+  .then(result => {
+    response.status(204).end()
+  })
+  .catch(error => next(error))
+/*  const id = Number(request.params.id)
   persons = persons.filter(person => person.id !== id)
 
-  response.status(204).end()
+  response.status(204).end() */
 })
-8
+
 const generateId = () => {
   const id = Math.floor(Math.random() * 1000)
   console.log(id)
@@ -66,7 +70,7 @@ app.post('/api/persons', (request, response) => {
     })
   }
 
-  /* const samePersons = persons.filter(person => person.name.includes(body.name))
+  /* const samePersons = Person.filter({name: body.name})
 
   if (samePersons.length > 0) {
     return response.status(400).json({ 
