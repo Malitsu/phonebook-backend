@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "watch": "nodemon index.js",
+    "lint": "eslint .",
     "test": "echo \\\"Error: no test specified\\\" && exit 1",
     "build:ui": "rm -rf build && cd ../fullstack/osa3/puhelinluettelo && npm run build --prod && cp -r build ../../../phonebook-backend/",
     "deploy": "git push heroku master",
@@ -24,13 +25,14 @@
   "homepage": "https://github.com/Malitsu/phonebook-backend#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^8.0.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.6.7",
+    "mongoose": "^5.7.5",
     "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.9.1"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "eslint": "^6.5.1",
+    "nodemon": "^1.19.4"
   }
 }
